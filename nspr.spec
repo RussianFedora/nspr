@@ -1,7 +1,7 @@
 Summary:        Netscape Portable Runtime
 Name:           nspr
-Version:        4.8.8
-Release:        4.el6.R
+Version:        4.8.9
+Release:        2%{?dist}.R
 License:        MPLv1.1 or GPLv2+ or LGPLv2+
 URL:            http://www.mozilla.org/projects/nspr/
 Group:          System Environment/Libraries
@@ -124,11 +124,9 @@ done
 %clean
 %{__rm} -Rf $RPM_BUILD_ROOT
 
-%post
-/sbin/ldconfig >/dev/null 2>/dev/null
+%post -p /sbin/ldconfig
 
-%postun
-/sbin/ldconfig >/dev/null 2>/dev/null
+%postun -p /sbin/ldconfig
 
 %files
 %defattr(-,root,root)
@@ -146,7 +144,16 @@ done
 %{_bindir}/nspr-config
 
 %changelog
-* Mon Jul 18 2011 Elio Maldonado <emaldona@redhat.com> - 4.8.8-4.el6.R
+* Thu Jan 26 2012 Arkady L. Shane <ashejn@russianfedora.ru> - 4.8.9-2.R
+- rebuilt for EL
+
+* Thu Sep  8 2011 Ville Skyttä <ville.skytta@iki.fi> - 4.8.9-2
+- Avoid %%post/un shell invocations and dependencies.
+
+* Tue Aug 09 2011 Elio Maldonado <emaldona@redhat.com> - 4.8.9-1
+- Update to NSPR_4_8_9_RTM
+
+* Mon Jul 18 2011 Elio Maldonado <emaldona@redhat.com> - 4.8.8-4
 - The tests must pass for the build to succeed
 
 * Mon Jul 18 2011 Elio Maldonado <emaldona@redhat.com> - 4.8.8-3
